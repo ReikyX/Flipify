@@ -1,12 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Flipify.View.MainView"
-             Title="MainView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:vm="clr-namespace:Flipify.ViewModel"
+             x:DataType="vm:MainViewModel"
+             x:Class="Flipify.View.MainView">
+
+
+
+    <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*,*" Padding="20" RowSpacing="10" ColumnSpacing="10">
+        <Image  Source="flipifygross.png" HorizontalOptions="Fill" VerticalOptions="Center" Grid.Row="0" Grid.Column="1"/>
+        <Border Grid.Row="1" Grid.Column="1" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3">
+            <Button Text="Placeholder"/>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="1" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3">
+            <Button Text="Placeholder"/>
+        </Border>
+        <Border Grid.Row="3" Grid.Column="1" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70" >
+            <Button Text="Beenden" Command="{Binding Beenden}" BackgroundColor="Red"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="0" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
+            <Button Text="Placeholder"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
+            <Button Text="Placeholder"/>
+        </Border>
+
+        <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0">
+            <CollectionView>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="2">
+            <CollectionView>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+    </Grid>
+
+
+
 </ContentPage>

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Flipify.View;
+using Flipify.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace Flipify
 {
@@ -15,8 +17,21 @@ namespace Flipify
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            //Dependency Injection View
+            builder.Services.AddSingleton<MainView>();
+
+            //Dependency Injection ViewModel
+            builder.Services.AddSingleton<MainViewModel>();
+
+            //Dependency Injection Model
+
+            //....
+
+
+
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

@@ -9,7 +9,11 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            return new Window(new AppShell())
+            {
+                Width = 1000,
+                Height = 700
+            };
         }
     }
 }
