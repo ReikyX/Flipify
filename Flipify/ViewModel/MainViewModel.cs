@@ -32,99 +32,48 @@ public partial class MainViewModel : BaseVM
         }
     }
 
-    private string _newDeckTitle;
-    public string NewDeckTitle
-    {
-        get => _newDeckTitle;
-        set
-        {
-            _newDeckTitle = value;
-            OnPropertyChanged(nameof(NewDeckTitle));
-        }
-    }
-
     public ICommand BeendenCommand { get; }
-    public ICommand AddDeckCommand { get; }
-    public ICommand OpenDeckCommand { get; }
-    public ICommand DeleteDeckCommand { get; }
     public ICommand NavigateToCommand { get; }
     public ICommand NavigateToNewDeckCommand { get; }
-    public ICommand NavigateBackCommand { get; }
-
-
+    public ICommand DeleteDeckCommand { get; }
 
     public MainViewModel(DeckService deckService)
     {
-        BeendenCommand = new Command(Application.Current.Quit);
-        AddDeckCommand = new Command(AddDeck);
-        OpenDeckCommand = new Command<Deck>(OpenDeck);
-        DeleteDeckCommand = new Command<Deck>(DeleteDeck);
+        _deckService = deckService;
 
         NavigateToCommand = new Command<Deck>(OnGridTapped);
-        NavigateToNewDeckCommand = new Command<string>(async (route) => await Shell.Current.GoToAsync(route));
-        NavigateBackCommand = new Command(NavigateBack);
+        NavigateToNewDeckCommand = new Command(NavigateToNewDeck);
+        BeendenCommand = new Command(Application.Current.Quit);
+        DeleteDeckCommand = new Command<Deck>(DeleteDeck);
 
-        _deckService = deckService;
 
         DecksLeft = _deckService.DefaultDecks;
         DecksRight = _deckService.UserDecks;
     }
 
-    private async void OnGridTapped(Deck selectedDeck)
+    private async void OnGridTapped(Deck deck)
     {
         await Shell.Current.GoToAsync(nameof(DeckView), true, new Dictionary<string, object>()
             {
                 {
-                "SelectedDeck", selectedDeck
+                "SelectedDeck", deck
                 }
 
             });
     }
-    private async void OpenDeck(Deck deck)
+    private async void NavigateToNewDeck()
     {
-        await Shell.Current.GoToAsync(nameof(DeckView));
+        await Shell.Current.GoToAsync(nameof(AddDeckView));
     }
-    public async void AddDeck()
-    {
-        if (!string.IsNullOrWhiteSpace(NewDeckTitle))
-        {
-            if (DecksRight.Any(d => d.DeckTitle.Equals(NewDeckTitle, StringComparison.OrdinalIgnoreCase)))
-            {
-                await Shell.Current.DisplayAlert("Fehler", "Deck existiert bereits!", "OK");
-                return;
-            }
-
-            var newDeck = new Deck
-            {
-                DeckTitle = NewDeckTitle,
-                Cards = new ObservableCollection<Card>()
-            };
-
-            _deckService.AddUserDeck(newDeck);
-            DecksRight = _deckService.GetDecksRight();
-            NewDeckTitle = string.Empty;
-            await Shell.Current.DisplayAlert("Success", "Deck added successfully", "OK");
-            await Shell.Current.GoToAsync(nameof(MainView));
-        }
-        else
-        {
-            await Shell.Current.DisplayAlert("Error", "Please enter a deck title", "OK");
-        }
-    }
-    public async void DeleteDeck(Deck deck)
+    private async void DeleteDeck(Deck deck)
     {
         if (deck == null) return;
 
-        bool confirm = await Shell.Current.DisplayAlert("Deck löschen", $"Willst du das Deck '{deck.DeckTitle}' löschen?", "Ja", "Nein");
-
+        bool confirm = await Shell.Current.DisplayAlert("Löschen", "Deck wirklich löschen?", "Ja", "Nein");
+        await Shell.Current.DisplayAlert("Erfolgreich", "Deck wurde gelöscht!", "OK");
         if (!confirm) return;
 
         _deckService.RemoveUserDeck(deck);
-        DecksRight.Remove(deck);
+    }
 
-    }
-    private async void NavigateBack()
-    {
-        await Shell.Current.GoToAsync("..");
-    }
 }

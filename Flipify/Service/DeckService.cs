@@ -26,16 +26,8 @@ public class DeckService
     }
     public void SaveUserDecks()
     {
-        try
-        {
             string json = JsonSerializer.Serialize(UserDecks);
             File.WriteAllText("decks.json", json);
-        }
-        catch (Exception ex)
-        {
-            // Handle exceptions (e.g., log the error)
-            Console.WriteLine($"Error saving decks: {ex.Message}");
-        }
     }
     public void LoadUserDecks()
     {

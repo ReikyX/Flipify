@@ -1,11 +1,13 @@
+
 using Flipify.ViewModel;
 
 namespace Flipify.View;
+
 public partial class DeckView : ContentPage
 {
-	public DeckView(DeckVM viewModel)
+	public DeckView(DeckVM vm)
 	{
 		InitializeComponent();
-		BindingContext = viewModel;
+		BindingContext = vm;
 	}
 }

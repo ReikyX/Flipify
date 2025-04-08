@@ -5,7 +5,7 @@ namespace Flipify.View;
 
 public partial class AddDeckView : ContentPage
 {
-	public AddDeckView(MainViewModel viewModel)
+	public AddDeckView(AddDeckVM viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

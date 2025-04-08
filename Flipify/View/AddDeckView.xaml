@@ -2,20 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Flipify.ViewModel"
-             x:DataType="vm:MainViewModel"
+             x:DataType="vm:AddDeckVM"
              x:Class="Flipify.View.AddDeckView">
 
     <VerticalStackLayout Padding="20" Spacing="15">
+        
         <Label Text="Neues Deck erstellen:" FontSize="24" />
 
-        <Entry Placeholder="Deck-Titel eingeben"
-               Text="{Binding NewDeckTitle}" />
+        <Entry Placeholder="Deck-Titel eingeben" Text="{Binding NewDeckTitle}" />
 
-        <Button Text="Speichern"
-                Command="{Binding AddDeckCommand}" />
+        <Button Text="Speichern" Command="{Binding AddDeckCommand}" />
 
-        <Button Text="Zurück"
-                Command="{Binding NavigateBackCommand}" />
-        
+        <Button Text="Zurück" Command="{Binding NavigateBackCommand}" />
+
     </VerticalStackLayout>
 </ContentPage>

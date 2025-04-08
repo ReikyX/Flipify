@@ -31,9 +31,6 @@
         <Border Grid.Row="0" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
             <Button Text="Meine Decks" FontSize="25" FontAttributes="Bold"/>
         </Border>
-        <Border Grid.Row="4" Grid.Column="0" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
-            <Button Text="Löschen" FontSize="25" FontAttributes="Bold" Command="{Binding DeleteDeckCommand}"/>
-        </Border>
         <Border Grid.Row="4" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
             <Button Text="Erstellen" FontSize="25" FontAttributes="Bold" Command="{Binding NavigateToNewDeckCommand}" CommandParameter="AddDeckView"/>
         </Border>
@@ -77,6 +74,10 @@
 
                             <Image Source="notiz.png"/>
                             <Label Text="{Binding DeckTitle}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header" TextColor="Black"/>
+                            <Border Grid.Row="4" Grid.Column="0" Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End">
+                                <Button Text="X" FontSize="20" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=DeleteDeckCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Border>
 
                         </Grid>
                     </DataTemplate>
