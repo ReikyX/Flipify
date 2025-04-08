@@ -2,50 +2,83 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Flipify.ViewModel"
+             xmlns:model="clr-namespace:Flipify.Model"
              x:DataType="vm:MainViewModel"
              x:Class="Flipify.View.MainView">
 
 
 
-    <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*,*" Padding="20" RowSpacing="10" ColumnSpacing="10">
-        <Image  Source="flipifygross.png" HorizontalOptions="Fill" VerticalOptions="Center" Grid.Row="0" Grid.Column="1"/>
-        <Border Grid.Row="1" Grid.Column="1" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3">
-            <Button Text="Placeholder"/>
-        </Border>
-        <Border Grid.Row="2" Grid.Column="1" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3">
-            <Button Text="Placeholder"/>
-        </Border>
+    <Grid RowDefinitions="auto,*,*,auto" ColumnDefinitions="*,*,*" Padding="20" RowSpacing="10" ColumnSpacing="10">
+
+        <Image Source="flipifygross.png" HorizontalOptions="Fill" VerticalOptions="Center" Grid.Row="0" Grid.Column="1"/>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Image Source="notiz.png" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" />
+            <Label Text="Frage" VerticalOptions="Center" HorizontalOptions="Center" FontSize="60" TextColor="Black"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Image Source="notizu.png" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" Grid.Column="1" />
+            <Label Text="Antwort" VerticalOptions="Center" HorizontalOptions="Center" FontSize="60" TextColor="Black"/>
+        </Grid>
+
+
+
         <Border Grid.Row="3" Grid.Column="1" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70" >
-            <Button Text="Beenden" Command="{Binding Beenden}" BackgroundColor="Red"/>
+            <Button Text="Beenden" FontSize="35" FontAttributes="Bold" Command="{Binding BeendenCommand}" BackgroundColor="Red"/>
         </Border>
         <Border Grid.Row="0" Grid.Column="0" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
-            <Button Text="Placeholder"/>
+            <Button Text="Default Decks" FontSize="25" FontAttributes="Bold"/>
         </Border>
         <Border Grid.Row="0" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
-            <Button Text="Placeholder"/>
+            <Button Text="Meine Decks" FontSize="25" FontAttributes="Bold"/>
+        </Border>
+        <Border Grid.Row="4" Grid.Column="0" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
+            <Button Text="Löschen" FontSize="25" FontAttributes="Bold" Command="{Binding DeleteDeckCommand}"/>
+        </Border>
+        <Border Grid.Row="4" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
+            <Button Text="Erstellen" FontSize="25" FontAttributes="Bold" Command="{Binding NavigateToNewDeckCommand}" CommandParameter="AddDeckView"/>
         </Border>
 
-        <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="0">
-            <CollectionView>
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0">
+
+            <CollectionView ItemsSource="{Binding DecksLeft}" Margin="0,15,0,15" SelectedItem="Single">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="model:Deck">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=NavigateToCommand}" CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+                            
+                            <Image Source="notiz.png"/>
+                            <Label Text="{Binding DeckTitle}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="60" TextColor="Black"/>
 
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
 
-        <Grid Grid.Row="1" Grid.RowSpan="3" Grid.Column="2">
-            <CollectionView>
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="2">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer/>
+            </Grid.GestureRecognizers>
+            <CollectionView ItemsSource="{Binding DecksRight}" Margin="0,15,0,15">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="model:Deck">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=NavigateToCommand}" CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
 
+                            <Image Source="notiz.png"/>
+                            <Label Text="{Binding DeckTitle}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header" TextColor="Black"/>
+
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

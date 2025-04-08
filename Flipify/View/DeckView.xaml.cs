@@ -1,14 +1,11 @@
-using Flipify.Model;
 using Flipify.ViewModel;
 
 namespace Flipify.View;
-
-public partial class MainView : ContentPage
+public partial class DeckView : ContentPage
 {
-	public MainView(MainViewModel viewModel)
+	public DeckView(DeckVM viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
-
 }

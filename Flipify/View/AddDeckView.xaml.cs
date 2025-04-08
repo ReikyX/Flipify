@@ -1,14 +1,13 @@
 using Flipify.Model;
+using Flipify.Service;
 using Flipify.ViewModel;
-
 namespace Flipify.View;
 
-public partial class MainView : ContentPage
+public partial class AddDeckView : ContentPage
 {
-	public MainView(MainViewModel viewModel)
+	public AddDeckView(MainViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-	}
-
+    }
 }
