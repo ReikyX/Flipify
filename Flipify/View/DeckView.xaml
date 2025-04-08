@@ -2,12 +2,37 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Flipify.ViewModel"
+             xmlns:model="clr-namespace:Flipify.Model"
              x:DataType="vm:DeckVM"
              x:Class="Flipify.View.DeckView"
              Title="DeckView">
 
-    <Grid RowDefinitions="*,auto">
-        <Button Grid.Row="1" Text="Back" Command="{Binding NavigateBackCommand}"/>
+    <Grid RowDefinitions="auto,*,auto">
+        <Grid RowDefinitions="*,*,*,*">
+            <Label Grid.Row="0" IsVisible="{Binding CanEditDeck}" Text="Neue Karte hinzufügen" FontAttributes="Bold" FontSize="20"/>
+            <Entry Grid.Row="1" IsVisible="{Binding CanEditDeck}" Placeholder="Vorderseite (z.B. Frage)" Text="{Binding CurrentQuestion}" />
+            <Entry Grid.Row="2" IsVisible="{Binding CanEditDeck}" Placeholder="Rückseite (z.B. Antwort)" Text="{Binding CurrentAnswer}" />
+            <Button Grid.Row="3" IsVisible="{Binding CanEditDeck}" Text="Karte hinzufügen" Command="{Binding AddCardCommand}" />
+        </Grid>
+       
+
+        <VerticalStackLayout Grid.Row="1" Padding="20">
+            <Label Text="Karten im Deck:" FontSize="20" />
+
+            <CollectionView ItemsSource="{Binding Cards}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Card">
+                        <Border Stroke="Gray" Padding="10">
+                            <StackLayout>
+                                <Label Text="{Binding Front}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Back}" />
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+        <Button Grid.Row="2" Text="Back" Command="{Binding NavigateBackCommand}"/>
     </Grid>
 
 </ContentPage>

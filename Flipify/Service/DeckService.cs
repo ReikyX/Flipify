@@ -53,7 +53,8 @@ public class DeckService
         {
             new Deck
             {
-                DeckTitle = "Englisch A1",
+                DeckTitle = "C#",
+                IsEditable = false,
                 Cards = new ObservableCollection<Card>
                 {
                     new Card { Front = "Apple", Back = "Apfel" },
@@ -62,7 +63,8 @@ public class DeckService
             },
             new Deck
             {
-                DeckTitle = "Französisch Basics",
+                DeckTitle = "Python",
+                IsEditable = false,
                 Cards = new ObservableCollection<Card>
                 {
                     new Card { Front = "Bonjour", Back = "Hallo" },

@@ -36,6 +36,12 @@ public partial class AddDeckVM : BaseVM
     {
         if (!string.IsNullOrWhiteSpace(NewDeckTitle))
         {
+            bool exists = _deckService.UserDecks.Any(d => d.DeckTitle.Equals(NewDeckTitle, StringComparison.OrdinalIgnoreCase));
+            if (exists)
+            {
+                await Shell.Current.DisplayAlert("Fehler", "Ein Deck mit diesem Namen existiert bereits!", "OK");
+                return;
+            }
             var newDeck = new Deck
             {
                 DeckTitle = NewDeckTitle,
