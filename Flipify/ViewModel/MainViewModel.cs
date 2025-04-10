@@ -34,7 +34,8 @@ public partial class MainViewModel : BaseVM
 
     public ICommand BeendenCommand { get; }
     public ICommand NavigateToCommand { get; }
-    public ICommand NavigateToNewDeckCommand { get; }
+    public ICommand CreateNewDeckCommand { get; }
+    public ICommand EditDeckCommand { get; }
     public ICommand DeleteDeckCommand { get; }
 
     public MainViewModel(DeckService deckService)
@@ -42,9 +43,10 @@ public partial class MainViewModel : BaseVM
         _deckService = deckService;
 
         NavigateToCommand = new Command<Deck>(OnGridTapped);
-        NavigateToNewDeckCommand = new Command(NavigateToNewDeck);
-        BeendenCommand = new Command(Application.Current.Quit);
+        CreateNewDeckCommand = new Command(CreateNewDeck);
+        EditDeckCommand = new Command<Deck>(EditDeck);
         DeleteDeckCommand = new Command<Deck>(DeleteDeck);
+        BeendenCommand = new Command(Application.Current.Quit);
 
 
         DecksLeft = _deckService.DefaultDecks;
@@ -61,19 +63,32 @@ public partial class MainViewModel : BaseVM
 
             });
     }
-    private async void NavigateToNewDeck()
+    private async void CreateNewDeck()
     {
-        await Shell.Current.GoToAsync(nameof(AddDeckView));
+        await Shell.Current.GoToAsync(nameof(DeckDetailView), true, new Dictionary<string, object>
+        {
+            {"EditDeck", null }
+        });
+    }
+    private async void EditDeck(Deck deck)
+    {
+
+        var param = new Dictionary<string, object>
+    {
+        { "EditDeck", deck }
+    };
+
+        await Shell.Current.GoToAsync(nameof(DeckDetailView), true, param);
     }
     private async void DeleteDeck(Deck deck)
     {
         if (deck == null) return;
 
         bool confirm = await Shell.Current.DisplayAlert("Löschen", "Deck wirklich löschen?", "Ja", "Nein");
-        await Shell.Current.DisplayAlert("Erfolgreich", "Deck wurde gelöscht!", "OK");
         if (!confirm) return;
 
         _deckService.RemoveUserDeck(deck);
-    }
 
+        await Shell.Current.DisplayAlert("Erfolgreich", "Deck wurde gelöscht!", "OK");
+    }
 }

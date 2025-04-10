@@ -32,12 +32,12 @@
             <Button Text="Meine Decks" FontSize="25" FontAttributes="Bold"/>
         </Border>
         <Border Grid.Row="4" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
-            <Button Text="Erstellen" FontSize="25" FontAttributes="Bold" Command="{Binding NavigateToNewDeckCommand}" CommandParameter="AddDeckView"/>
+            <Button Text="Erstellen" FontSize="25" FontAttributes="Bold" Command="{Binding CreateNewDeckCommand}" CommandParameter="AddDeckView"/>
         </Border>
 
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0">
 
-            <CollectionView ItemsSource="{Binding DecksLeft}" Margin="0,15,0,15" SelectedItem="Single">
+            <CollectionView ItemsSource="{Binding DecksLeft}" Margin="0,15,0,15">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
@@ -47,10 +47,8 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=NavigateToCommand}" CommandParameter="{Binding .}"/>
                             </Grid.GestureRecognizers>
-                            
                             <Image Source="notiz.png"/>
                             <Label Text="{Binding DeckTitle}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="60" TextColor="Black"/>
-
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -74,11 +72,14 @@
 
                             <Image Source="notiz.png"/>
                             <Label Text="{Binding DeckTitle}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header" TextColor="Black"/>
-                            <Border Grid.Row="4" Grid.Column="0" Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End">
-                                <Button Text="X" FontSize="20" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=DeleteDeckCommand}"
+                            <Border Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3" HorizontalOptions="End" VerticalOptions="End">
+                                <Button Text="X" FontSize="15" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=DeleteDeckCommand}"
                                         CommandParameter="{Binding .}"/>
                             </Border>
-
+                            <Border Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3"  HorizontalOptions="Start" VerticalOptions="End">
+                                <Button Text="#" FontSize="15" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=EditDeckCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Border>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

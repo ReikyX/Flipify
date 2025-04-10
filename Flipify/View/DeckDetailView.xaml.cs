@@ -3,9 +3,9 @@ using Flipify.Service;
 using Flipify.ViewModel;
 namespace Flipify.View;
 
-public partial class AddDeckView : ContentPage
+public partial class DeckDetailView : ContentPage
 {
-	public AddDeckView(AddDeckVM viewModel)
+	public DeckDetailView(DeckDetailVM viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

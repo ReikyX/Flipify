@@ -22,13 +22,15 @@ namespace Flipify
             //Dependency Injection View
             builder.Services.AddSingleton<MainView>();
             builder.Services.AddTransient<DeckView>();
-            builder.Services.AddTransient<AddDeckView>();
+            builder.Services.AddTransient<DeckDetailView>();
+            builder.Services.AddTransient<CardDetailView>();
 
             //Dependency Injection ViewModel
             builder.Services.AddSingleton<BaseVM>();
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<DeckVM>();
-            builder.Services.AddSingleton<AddDeckVM>();
+            builder.Services.AddSingleton<DeckDetailVM>();
+            builder.Services.AddSingleton<CardDetailVM>();
 
             //Dependency Injection Model
             builder.Services.AddSingleton<Card>();

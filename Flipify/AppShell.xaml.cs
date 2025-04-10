@@ -10,7 +10,8 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(MainView), typeof(MainView));
         Routing.RegisterRoute(nameof(DeckView), typeof(DeckView));
-        Routing.RegisterRoute(nameof(AddDeckView), typeof(AddDeckView));
+        Routing.RegisterRoute(nameof(DeckDetailView), typeof(DeckDetailView));
+        Routing.RegisterRoute(nameof(CardDetailView), typeof(CardDetailView));
 
     }
 }

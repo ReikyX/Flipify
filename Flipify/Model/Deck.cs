@@ -3,10 +3,22 @@ using System.Collections.ObjectModel;
 
 namespace Flipify.Model;
 
-public class Deck
+public partial class Deck : BaseVM
 {
-    public string DeckTitle { get; set; }
+    private string _deckTitle;
+    public string DeckTitle
+    {
+        get => _deckTitle;
+        set
+        {
+            if (_deckTitle != value)
+            {
+                _deckTitle = value;
+                OnPropertyChanged(nameof(DeckTitle));
+            }
+        }
+    }
     public ObservableCollection<Card> Cards { get; set; } = new();
 
-    public bool IsEditable { get; set; } = true;
+    public bool DeckIsEditable { get; set; } = true;
 }
