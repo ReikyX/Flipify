@@ -4,7 +4,8 @@
              xmlns:vm="clr-namespace:Flipify.ViewModel"
              xmlns:model="clr-namespace:Flipify.Model"
              x:DataType="vm:MainViewModel"
-             x:Class="Flipify.View.MainView">
+             x:Class="Flipify.View.MainView"
+             NavigationPage.HasNavigationBar="False">
 
 
 
@@ -13,29 +14,19 @@
         <Image Source="flipifygross.png" HorizontalOptions="Fill" VerticalOptions="Center" Grid.Row="0" Grid.Column="1"/>
         <Grid Grid.Column="1" Grid.Row="1">
             <Image Source="notiz.png" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" />
-            <Label Text="Frage" VerticalOptions="Center" HorizontalOptions="Center" FontSize="60" TextColor="Black"/>
+            <Image Source="question.png" VerticalOptions="Center" HorizontalOptions="Center" />
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2">
             <Image Source="notizu.png" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" Grid.Column="1" />
-            <Label Text="Antwort" VerticalOptions="Center" HorizontalOptions="Center" FontSize="60" TextColor="Black"/>
+            <Image Source="answer.png" VerticalOptions="Center" HorizontalOptions="Center"/>
         </Grid>
 
+        <ImageButton Source="exit.png" Command="{Binding BeendenCommand}" Grid.Column="1" Grid.Row="3" Background="Transparent"/>
 
-
-        <Border Grid.Row="3" Grid.Column="1" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70" >
-            <Button Text="Beenden" FontSize="35" FontAttributes="Bold" Command="{Binding BeendenCommand}" BackgroundColor="Red"/>
-        </Border>
-        <Border Grid.Row="0" Grid.Column="0" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
-            <Button Text="Default Decks" FontSize="25" FontAttributes="Bold"/>
-        </Border>
-        <Border Grid.Row="0" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
-            <Button Text="Meine Decks" FontSize="25" FontAttributes="Bold"/>
-        </Border>
-        <Border Grid.Row="4" Grid.Column="2" Stroke="AliceBlue" StrokeShape="RoundRectangle 20" StrokeThickness="3" WidthRequest="200" HeightRequest="70">
-            <Button Text="Erstellen" FontSize="25" FontAttributes="Bold" Command="{Binding CreateNewDeckCommand}" CommandParameter="AddDeckView"/>
-        </Border>
-
-        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0">
+        <ImageButton Source="default.png" Background="Transparent" VerticalOptions="End"/>
+        <ImageButton Source="userdeck.png" Background="Transparent" VerticalOptions="End" Grid.Column="2" Grid.Row="0"/>
+        <ImageButton Source="new.png" Background="Transparent" Command="{Binding CreateNewDeckCommand}" CommandParameter="AddDeckView" Grid.Column="2" Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Padding="1">
 
             <CollectionView ItemsSource="{Binding DecksLeft}" Margin="0,15,0,15">
                 <CollectionView.ItemsLayout>
@@ -47,7 +38,7 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=NavigateToCommand}" CommandParameter="{Binding .}"/>
                             </Grid.GestureRecognizers>
-                            <Image Source="notiz.png"/>
+                            <Image Source="notiz.png" Aspect="Fill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
                             <Label Text="{Binding DeckTitle}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="60" TextColor="Black"/>
                         </Grid>
                     </DataTemplate>
@@ -72,12 +63,12 @@
 
                             <Image Source="notiz.png"/>
                             <Label Text="{Binding DeckTitle}" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Header" TextColor="Black"/>
-                            <Border Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3" HorizontalOptions="End" VerticalOptions="End">
-                                <Button Text="X" FontSize="15" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=DeleteDeckCommand}"
+                            <Border Stroke="Grey" StrokeShape="RoundRectangle 30" StrokeThickness="3" HorizontalOptions="End" VerticalOptions="End">
+                                <ImageButton Source="loeschen.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=DeleteDeckCommand}"
                                         CommandParameter="{Binding .}"/>
                             </Border>
-                            <Border Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3"  HorizontalOptions="Start" VerticalOptions="End">
-                                <Button Text="#" FontSize="15" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=EditDeckCommand}"
+                            <Border Stroke="Grey" StrokeShape="RoundRectangle 30" StrokeThickness="3"  HorizontalOptions="Start" VerticalOptions="End">
+                                <ImageButton Source="bearbeiten.png" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=EditDeckCommand}"
                                         CommandParameter="{Binding .}"/>
                             </Border>
                         </Grid>

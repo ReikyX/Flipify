@@ -11,8 +11,8 @@
         {
             return new Window(new AppShell())
             {
-                Width = 1000,
-                Height = 700
+                Width = 1200,
+                Height = 900
             };
         }
     }

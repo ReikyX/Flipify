@@ -4,12 +4,11 @@
              xmlns:vm="clr-namespace:Flipify.ViewModel"
              xmlns:model="clr-namespace:Flipify.Model"
              x:DataType="vm:DeckVM"
-             x:Class="Flipify.View.DeckView"
-             Title="DeckView">
+             x:Class="Flipify.View.DeckView">
 
-    <Grid RowDefinitions="auto,*,auto,auto" Padding="10" RowSpacing="10">
+    <Grid RowDefinitions="auto,*,auto,auto" Padding="10" Margin="0,30,0,0" RowSpacing="10">
         <Grid>
-            <Label Text="Karten im Deck:" FontSize="20" HorizontalTextAlignment="Center"/>
+            <Image Source="cards.png" Background="Transparent" HeightRequest="70" VerticalOptions="Center" HorizontalOptions="Center"/>
         </Grid>
 
 
@@ -29,14 +28,14 @@
 
                             <Image x:Name="CardImage" Source="notiz.png" RotationY="0"/>
                             
-                            <Label x:Name="CardText" Text="{Binding DisplayText}" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black"/>
+                            <Label Padding="30" x:Name="CardText" Text="{Binding DisplayText}" FontAttributes="Bold" FontSize="25" HorizontalTextAlignment="Center" VerticalOptions="Center" TextColor="Black"/>
     
                             <Grid IsVisible="{Binding Source={RelativeSource AncestorType={x:Type vm:DeckVM}}, Path=CanEditDeck}">
-                                <Border Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End">
-                                    <Button Text="X" FontSize="20" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DeckVM}}, Path=DeleteCardCommand}" CommandParameter="{Binding .}"/>
+                                <Border Stroke="Grey" StrokeShape="RoundRectangle 30" StrokeThickness="3" WidthRequest="50" HeightRequest="50" HorizontalOptions="End" VerticalOptions="End">
+                                    <ImageButton Source="loeschen.png" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DeckVM}}, Path=DeleteCardCommand}" CommandParameter="{Binding .}"/>
                                 </Border>
-                                <Border Stroke="AliceBlue" StrokeShape="RoundRectangle 30" StrokeThickness="3" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="End">
-                                    <Button Text="#" FontSize="20" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DeckVM}}, Path=EditCardCommand}" CommandParameter="{Binding .}"/>
+                                <Border Stroke="Grey" StrokeShape="RoundRectangle 30" StrokeThickness="3" WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="End">
+                                    <ImageButton Source="bearbeiten.png" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DeckVM}}, Path=EditCardCommand}" CommandParameter="{Binding .}"/>
                                 </Border>
                             </Grid>
 
@@ -47,8 +46,8 @@
             </CollectionView>
         </Grid>
 
-        <Button Grid.Row="3" Text="Back" Command="{Binding NavigateBackCommand}"/>
-        <Button Grid.Row="2" IsVisible="{Binding CanEditDeck}" Text="Karte hinzufügen" Command="{Binding NewCardCommand}" />
+        <ImageButton Grid.Row="3" Source="zurueck.png" Command="{Binding NavigateBackCommand}" Background="Transparent"/>
+        <Button Grid.Row="2" IsVisible="{Binding CanEditDeck}" Text="Add Card" Command="{Binding NewCardCommand}" />
     </Grid>
 
 </ContentPage>

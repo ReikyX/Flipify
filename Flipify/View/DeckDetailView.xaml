@@ -5,15 +5,15 @@
              x:DataType="vm:DeckDetailVM"
              x:Class="Flipify.View.DeckDetailView">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Margin="0,100,0,0" Padding="20" Spacing="30">
         
-        <Label Text="{Binding LabelText}" FontSize="24" />
+        <Image Source="{Binding LabelText}" HorizontalOptions="Center" HeightRequest="70"/>
 
-        <Entry Placeholder="Deck-Titel eingeben" Text="{Binding NewDeckTitle}" />
+        <Entry Placeholder="Enter Deck-Titel" Text="{Binding NewDeckTitle}" HorizontalTextAlignment="Center" />
 
-        <Button Text="Speichern" Command="{Binding SaveDeckCommand}" />
+        <ImageButton Source="speichern.png" Command="{Binding SaveDeckCommand}" Background="Transparent" VerticalOptions="Center" HorizontalOptions="Center"/>
 
-        <Button Text="Zurück" Command="{Binding NavigateBackCommand}" />
+        <ImageButton Source="zurueck.png" Command="{Binding NavigateBackCommand}" Background="Transparent" VerticalOptions="Center" HorizontalOptions="Center"/>
 
     </VerticalStackLayout>
 </ContentPage>

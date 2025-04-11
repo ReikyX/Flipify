@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Flipify.ViewModel"
              x:DataType="vm:CardDetailVM"
-             x:Class="Flipify.View.CardDetailView"
-             Title="CardDetailView">
+             x:Class="Flipify.View.CardDetailView">
     
-    <Grid RowDefinitions="*,*,*,auto,auto" RowSpacing="10" Padding="10">
-        <Label Grid.Row="0" Text="{Binding LabelText}" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center"/>
-        <Entry Grid.Row="1" Placeholder="Vorderseite (z.B. Frage)" Text="{Binding Front}" HorizontalTextAlignment="Center"/>
+    <Grid RowDefinitions="auto,50,50,auto,auto" RowSpacing="20" Padding="10" Margin="0,30,0,0">
+        <Image Grid.Row="0" Source="{Binding LabelText}" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="70"/>
+        <Entry Grid.Row="1" Placeholder="Vorderseite (z.B. Frage)" Text="{Binding Front}" HorizontalTextAlignment="Center" />
         <Entry Grid.Row="2" Placeholder="Rückseite (z.B. Antwort)" Text="{Binding Back}" HorizontalTextAlignment="Center"/>
-        <Button Grid.Row="3" Text="{Binding ButtonText}" Command="{Binding SaveCardCommand}" />
-        <Button Grid.Row="4" Text="Back" Command="{Binding NavigateBackCommand}"/>
+        <ImageButton Grid.Row="3" Source="speichern.png" Command="{Binding SaveCardCommand}" Background="Transparent"/>
+        <ImageButton Grid.Row="4" Source="zurueck.png" Command="{Binding NavigateBackCommand}" Background="Transparent"/>
     </Grid>
 </ContentPage>

@@ -16,6 +16,12 @@ public partial class DeckView : ContentPage
 
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+        _vm.ResetCards();
+    }
     private async void RotateImage(object sender, TappedEventArgs e)
     {
         var grid = sender as Grid;
@@ -28,12 +34,14 @@ public partial class DeckView : ContentPage
 
         if (card.IsFlipped)
         {
-            await image.RotateYTo(0, 500, Easing.CubicInOut);
+            await image.RotateXTo(0, 500, Easing.CubicInOut);
+
             label.Text = card.Front;
         }
         else
         {
-            await image.RotateYTo(180, 500, Easing.CubicInOut);
+            await image.RotateXTo(180, 500, Easing.CubicInOut);
+
             label.Text = card.Back;
         }
 

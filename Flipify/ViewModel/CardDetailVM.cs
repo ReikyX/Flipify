@@ -28,7 +28,6 @@ public partial class CardDetailVM : BaseVM
                 Back = string.Empty;
             }
             OnPropertyChanged(nameof(EditCard));
-            OnPropertyChanged(nameof(ButtonText));
             OnPropertyChanged(nameof(LabelText));
             OnPropertyChanged(nameof(Front));
             OnPropertyChanged(nameof(Back));
@@ -36,8 +35,7 @@ public partial class CardDetailVM : BaseVM
     }
     public Deck SelectedDeck { get; set; }
 
-    public string LabelText => EditCard != null ? "Karte bearbeiten" : "Neue Karte erstellen";
-    public string ButtonText => EditCard != null ? "Karte speichern" : "Karte hinzufügen";
+    public ImageSource LabelText => EditCard != null ? "editcard.png" : "newcard.png";
 
     private string _front;
     public string Front

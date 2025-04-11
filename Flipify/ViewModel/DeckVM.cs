@@ -42,8 +42,6 @@ public partial class DeckVM : BaseVM
     public ObservableCollection<Card> Cards => SelectedDeck?.Cards;
     public bool CanEditDeck => SelectedDeck?.DeckIsEditable ?? false;
 
-
-    //public ICommand FlipCardCommand { get; }
     public ICommand NewCardCommand { get; }
     public ICommand EditCardCommand { get; }
     public ICommand DeleteCardCommand { get; }
@@ -56,17 +54,19 @@ public partial class DeckVM : BaseVM
         EditCardCommand = new Command<Card>(EditCard);
         DeleteCardCommand = new Command<Card>(DeleteCard);
         NavigateBackCommand = new Command(NavigateBack);
-        //FlipCardCommand = new Command<Card>(FlipCard);
+
     }
 
-    //private void FlipCard(Card card)
-    //{
-    //    if (card != null)
-    //    {
-    //        card.IsFlipped = !card.IsFlipped;
-    //        OnPropertyChanged(nameof(Cards));
-    //    }
-    //}
+    public void ResetCards()
+    {
+        if (SelectedDeck != null)
+        {
+            foreach(var card in SelectedDeck.Cards)
+            {
+                card.IsFlipped = false;
+            }
+        }
+    }
     private async void NewCard()
     {
         await Shell.Current.GoToAsync(nameof(CardDetailView), true, new Dictionary<string, object>

@@ -27,7 +27,7 @@ public partial class DeckDetailVM : BaseVM
             OnPropertyChanged(nameof(NewDeckTitle));
         }
     }
-    public string LabelText => EditDeck != null ? "Deck bearbeiten" : "Neues Deck erstellen";
+    public ImageSource LabelText => EditDeck != null ? "editdeck.png" : "new.png";
     private string _newDeckTitle;
     public string NewDeckTitle
     {
